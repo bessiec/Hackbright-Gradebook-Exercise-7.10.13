@@ -1,21 +1,49 @@
 <html>
-<body>
-	<body style ="font-family: monospace">
+	<head> 
+		<link rel="stylesheet" type="text/css" href="/static/styles.css"/> 
+			<script>
+			var dropdown_safety = function(form,id) {
+				var e = document.getElementById(id);
+				var proj = e.options[e.selectedIndex].value;
+				if  (proj !== "default") {
+					form.submit();
+				}
+			}
+				
+		</script>
+	</head>
+	<body>
+		<div id="container">
 
-	<h1>Your Gradebook</h1>
-	<form action="/search">
-		<p><a href = "/search"> SEARCH or ADD everything</a>
-	</form>
-	<form action="/project_list">	
-		<p><label for = "project"> SEARCH by Project </label>
-		<input type = "text" name="project" />
-		<input type = "submit">
-	</form>
-	<form action="/student">	
-		<p><label for = "project"> SEARCH STUDENTS by Github </label>
-		<input type = "text" name="github" />
-		<input type = "submit">
-	</form>
-</style>
+		<h1>YO GRADEBOOK</h1>
+		<form action="/project_list">	
+			<p><label for = "project"> SELECT PROJECT by title </label>
+			<select id = "project_dropdown" onchange = "dropdown_safety(this.form,this.id)" name="project">
+				<option value ="default"></option>
+				{% for project in all_projects %}
+				<option value ="{{project[0]}}">{{project[0]}}</option>
+				{% endfor %}
+			</select>
+			</p>
+		</form> 
+		<form action="/student">
+			<p><label for = "github"> SELECT STUDENTS by Github </label>
+			<select id = "student_dropdown" onchange ="dropdown_safety(this.form,this.id)" name="github">
+				<option value ="default"></option>
+				{% for github in all_students %}
+				<option value ="{{github[0]}}">{{github[0]}}</option>
+				{% endfor %}
+			</select>
+			</p>
+		</form>
+
+		<form action="/search">
+			<h2><p><a href = "/summary">SEE SUMMARY</a> | 
+ 				<a href = "/search"> ADD STUFF</a></h2>
+		</form>
+
+</div>
 </body>
+
+
 </html>

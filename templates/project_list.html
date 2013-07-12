@@ -1,14 +1,16 @@
 <html>
-<body>
-<body style ="font-family: monospace">
-<center>
-	<h1>{{project_name}}</h1>
-	<h2>{{project_description}}</h2>
-	{% for i,j,k,l in all_student_projects %}
-	<li><a href="/student?github={{ i }}"> {{i}}</a> received {{ j }} out of {{ k }} on this project. </li>
-	{% endfor %}
-<p><a href = "/">HOME</a></p>	
-</center>
-</style>
+	<head> 
+		<link rel="stylesheet" type="text/css" href="/static/styles.css"/> 
+	</head>
+	<body>
+	<div id="container">
+		<form action="/create_student">
+				<h1>{{project_name}}</h1>
+				<h2>{{project_description}}</h2>
+				{% for i,j,k,l in all_student_projects %}
+				<li><a href="/student?github={{ i }}"> {{i}}</a> received {{ j }} out of {{ k }} on this project. </li>
+				{% endfor %}
+			<p><a href = "/">HOME</a></p>	
+	</div>
 </body>
 </html>

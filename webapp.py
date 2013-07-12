@@ -5,7 +5,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    hackbright_app.connect_to_db()
+    all_students = hackbright_app.all_students()
+    all_projects = hackbright_app.all_projects()
+    html = render_template("home.html",all_students=all_students,all_projects=all_projects)
+    return html
+
+@app.route("/summary")
+def summary():
+    hackbright_app.connect_to_db()
+    row = hackbright_app.summary()
+    html = render_template("summary.html", summary=row)
+    return html
 
 @app.route("/search")
 def get_github():
@@ -57,7 +68,21 @@ def create_project():
     description = request.args.get("description")
     max_grade = request.args.get("max_grade")
     hackbright_app.make_new_project(project, description, max_grade)
+    return get_projects()
+
+@app.route("/grade_student")
+def give_student_grade():
+    return render_template("new_grade.html")
+
+@app.route("/create_grade")
+def new_grade_page():
+    hackbright_app.connect_to_db()
+    grade = request.args.get("grade")
+    github = request.args.get("github")
+    project = request.args.get("project")
+    hackbright_app.give_a_grade(github, project, grade)
     return get_student()
+
 
 if __name__ == "__main__":
     app.run(debug=True)

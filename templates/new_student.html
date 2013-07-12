@@ -1,30 +1,33 @@
 <html>
-<body>
-	<body style ="font-family: monospace">
-		<center>
-	<form action="/create_student">
-	<p>
+	<head> 
+		<link rel="stylesheet" type="text/css" href="/static/styles.css"/> 
+	</head>
+	<body>
+	<div id="container">
+		<h2>ADD STUDENT</h2>
 
-		<label for = "first_name">Enter first_name </label>
-		<input type = "text" name="first_name" />
-	</p>
-	<p>
+		<form action="/create_student">
+		<p>
 
-		<label for = "last_name">Enter last name </label>
-		<input type = "text" name="last_name" />
-	</p>
-	<p>
+			<label for = "first_name">Enter first_name </label>
+			<input type = "text" name="first_name" />
+		</p>
+		<p>
 
-		<label for = "github">Enter github id </label>
-		<input type = "text" name="github" />
-	</p>
-	<p>
+			<label for = "last_name">Enter last name </label>
+			<input type = "text" name="last_name" />
+		</p>
+		<p>
 
-		<input type = "submit">
-	</p>
-	</form>
-<p><a href = "/">HOME</a></p>	
-</center>
-</style>
+			<label for = "github">Enter github id </label>
+			<input type = "text" name="github" />
+		</p>
+		<p>
+
+			<input type = "submit">
+		</p>
+		</form>
+			<p><a href = "/">HOME</a> | <a href = "/search">ADD</a></p>
+	</div>
 </body>
 </html>

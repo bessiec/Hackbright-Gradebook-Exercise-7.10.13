@@ -1,22 +1,24 @@
 <html>
-<body>
-<body style ="font-family: monospace">
-	<center>
-	<h1>Student: {{first_name}} {{last_name}}</h1>
-	<h2>Github account: {{github}}</h2>
-	<p>This student has shown extreme recalcitrance and has generally proved to be unreliable.</p>
-	<p>It is my recommendation that they be put on double-secret probation for the remainder of the course.</p>
-	
-	<form action="/project_list">
-		{% for project,grade in grades %}
-			<li>He received a {{ grade }} on his <a for = "project" href="/project_list?project={{project}}" >
-			{{ project }}</a> project.
-			</li>
-		{% endfor %}
-	</form>
-<p><a href = "/">HOME</a></p>
-	</center>
-</style>
+	<head> 
+		<link rel="stylesheet" type="text/css" href="/static/styles.css"/> 
+	</head>
+	<body>
+	<div id="container">
+		<form action="/create_student">
+			<h1>Student: {{first_name}} {{last_name}}</h1>
+			<h2>Github account: {{github}}</h2>
+			<p>This student has shown extreme recalcitrance and has generally proved to be unreliable.</p>
+			<p>It is my recommendation that they be put on double-secret probation for the remainder of the course.</p>
+			
+			<form action="/project_list">
+				{% for project,grade in grades %}
+					<li>He received a {{ grade }} on his <a for = "project" href="/project_list?project={{project}}" >
+					{{ project }}</a> project.
+					</li>
+				{% endfor %}
+			</form>
+		<p><a href = "/">HOME</a></p>
+	</div>
 </body>
 </html>
 

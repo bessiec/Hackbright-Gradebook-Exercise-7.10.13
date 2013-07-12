@@ -1,0 +1,48 @@
+<html>
+	<head> 
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css"/> 		
+		<link rel="stylesheet" type="text/css" href="static/styles.css"/> 
+
+	</head>
+	<body>
+
+		<div id="container">
+
+			<h1> <center> CLASS SUMMARY </center></h1>
+
+			<table class="table table-bordered">
+				<col width="3000">
+
+			 <thead>
+			 <tr>
+				 <th>FIRST NAME</th>
+				 <th>LAST NAME</th>
+				 <th>GITHUB</th>
+				 <th>PROJECT</th>
+				 <th>DESCRIPTION</th>
+				 <th>GRADE</th>
+				 <th>MAX GRADE</th>
+			 </tr>
+			 </thead>
+			 <tbody>
+			{% for row in summary %}
+				<tr> 
+					{%for cell in row %}
+					<td> {{ cell }} </td>
+					{% endfor %}					
+				</tr>
+			{% endfor %}				
+
+			 </tbody>
+
+			</table>
+			<br>
+			<p><h3><a href = "/">HOME</a></h3></p>
+
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+		</div>
+
+	</body>
+</html>

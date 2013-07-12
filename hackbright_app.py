@@ -6,11 +6,10 @@ CONN = None
 def get_student_by_github(github):
     query = """SELECT first_name, last_name, github FROM Students WHERE github = ?"""
     DB.execute(query, (github,)) # Where we call the desired github handle, NEED TUPLE
-    print github,'THIS IS THE GITHUB'
     row = DB.fetchone() # calls each line one at a time
     return row
-#Student: %s %s
-#Github account: %s"""%(row[0], row[1], row[2])
+#Student: %s %Github
+#s account: %s"""%(row[0], row[1], row[2])
 
 def connect_to_db():
     global DB, CONN
@@ -19,6 +18,32 @@ def connect_to_db():
     CONN = sqlite3.connect("hackbright.db")
 # Here, a cursor is similar to a file handler
     DB = CONN.cursor()
+
+def summary():
+    query = """SELECT first_name, last_name, github, title, description, grade, max_grade
+                FROM Projects JOIN
+                    (SELECT first_name,last_name,github,project_title,grade
+                        FROM Students JOIN Grades
+                        ON student_github = github)
+                AS sg
+            ON project_title = title;"""
+    DB.execute(query, )
+    row = DB.fetchall()
+    return row
+
+def all_students():
+    query ="""SELECT github
+            FROM Students;"""
+    DB.execute(query,)
+    row = DB.fetchall()
+    return row
+
+def all_projects():
+    query ="""SELECT title
+            FROM Projects;"""
+    DB.execute(query,)
+    row = DB.fetchall()
+    return row
 
 def make_new_student(first_name, last_name, github):
     query = """INSERT into Students values (?, ?, ?)"""
@@ -43,13 +68,17 @@ def find_project(title):
     # Text: %s
     # Maximum Grade: %d""" % (row[0], row[1], row[2])
 
+def give_a_grade(github,project,grade):
+    query2 = """INSERT INTO Grades VALUES (?,?,?)"""
+    DB.execute(query2, (project,github,grade))
+    CONN.commit()
+    print "Successfully added grade of %s for %s on their %s project" %(grade,github,project)
+
 def grades_by_student(github):
     query = """SELECT project_title, grade FROM Grades WHERE student_github = ?"""
     DB.execute(query, (github,))
     row = DB.fetchall()
     return row
-        # for card in row:
-        #     print "Project: %s - Grade: %d" %(card[0],card[1])
 
 
 def main():
